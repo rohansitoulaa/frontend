@@ -26,7 +26,7 @@ A modern, modular application designed to facilitate news content creation and m
 Clone this repository:
 
 ```bash
-git clone https://github.com/yourusername/global-herald.git
+git clone https://github.com/rohansitoulaa/frontend
 ```
 
 Navigate to the project directory:
