@@ -7,6 +7,7 @@ interface User {
   email: string;
   fullName: string;
   preferences:string[];
+  UserId: string;
 }
 
 interface AuthStore {
@@ -30,11 +31,21 @@ export const useAuthStore = create<AuthStore>()(
       fetchUser: async () => {
         const token = get().token;
         if (!token) return;
-
+      
         try {
-            const { profile } = await getProfile(); // hit /auth/profile
-          
-          set({  user: profile });
+          const { profile } = await getProfile();
+          const response = await getProfile();
+          console.log("🟡 getProfile() raw response:", response);
+
+          set({
+            user: {
+              email: profile.email,
+              fullName: profile.fullName,
+              preferences: profile.preferences,
+              UserId: profile.UserId, // 🟢 map UserId → authorId
+            },
+          });
+          console.log(profile.UserId);
         } catch (err) {
           console.error("❌ Error fetching user profile", err);
           set({ user: null, token: null });
@@ -48,7 +59,10 @@ export const useAuthStore = create<AuthStore>()(
     }),
     {
       name: "auth-storage", // this saves token & user in localStorage
-      partialize: (state) => ({ token: state.token }), // only persist token
+      partialize: (state) => ({
+        token: state.token,
+        userId: state.user?.UserId || null,
+      }),
     }
   )
 );

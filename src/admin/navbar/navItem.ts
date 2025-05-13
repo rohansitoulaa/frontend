@@ -20,8 +20,8 @@ export const navItems = [
         imgSrc: "/images/Stats.png",
       },
       {
-        value: "Settings",
-        imgSrc: "/images/settings.png",
+        value: "Logout",
+        imgSrc: "/images/logout.png",
       },
   ];
 

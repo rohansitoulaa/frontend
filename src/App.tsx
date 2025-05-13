@@ -10,10 +10,9 @@ const App = () => {
   const fetchUser = useAuthStore((state) => state.fetchUser);
   const token = useAuthStore((state) => state.token);
 
-
   useEffect(() => {
     if (token) fetchUser();
-  }, [token]);
+  }, [token, fetchUser]);
 
   const theme = useThemeStore((state) => state.theme);
 
@@ -26,7 +25,9 @@ const App = () => {
   }, [theme]);
 
   return (
-    <div className={` h-[100vh]  dark:bg-[linear-gradient(to_right,_#111,_#222,_#111)] dark:text-[#F2F3F4] `}>
+    <div
+      className={` h-[100vh]  dark:bg-[linear-gradient(to_right,_#111,_#222,_#111)] dark:!bg-black dark:!text-white `}
+    >
       <HomePage />
     </div>
   );

@@ -1,11 +1,20 @@
 import { useState } from "react";
 import Button from "../../components/common/Button/Button";
 import { AuthApi } from "../../api/auth";
+import { useAuthStore } from "../../stores/authStore";
 
-const Step4 = ({ onNext, onBack }: { onNext: () => void; onBack: () => void }) => {
+const Step4 = ({
+  onNext,
+  onBack,
+}: {
+  onNext: () => void;
+  onBack: () => void;
+}) => {
+  const { user } = useAuthStore();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // 🔄 Loader state
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -14,7 +23,6 @@ const Step4 = ({ onNext, onBack }: { onNext: () => void; onBack: () => void }) =
       setPreviewUrl(URL.createObjectURL(file));
       setError("");
 
-      // ✅ Save image metadata to localStorage
       const imageMeta = {
         name: file.name,
         type: file.type,
@@ -22,70 +30,70 @@ const Step4 = ({ onNext, onBack }: { onNext: () => void; onBack: () => void }) =
         lastModified: file.lastModified,
       };
       localStorage.setItem("uploadedImageMeta", JSON.stringify(imageMeta));
-      console.log("✅ Image metadata saved to localStorage:", imageMeta);
     } else {
       setError("Please upload a valid image.");
     }
   };
 
   const handleSubmit = async () => {
-    console.log("🚀 Starting submission...");
-
     if (!imageFile) {
       setError("Image must be uploaded.");
-      console.log("❌ No image file selected.");
       return;
     }
 
+    setIsLoading(true); // 🔄 Start loading
+
     try {
-      // ✅ Get other data from localStorage
       const preferences = localStorage.getItem("step1-preferences");
       const title = localStorage.getItem("step2-title");
       const imageMeta = localStorage.getItem("uploadedImageMeta");
       const pdfMeta = localStorage.getItem("uploadedPdfMeta");
 
-      console.log("📝 Retrieved step1-preferences:", preferences);
-      console.log("📝 Retrieved step2-title:", title);
-      console.log("📝 Retrieved uploadedImageMeta:", imageMeta);
-      console.log("📝 Retrieved uploadedPdfMeta:", pdfMeta);
-
       if (!preferences || !title || !pdfMeta || !imageMeta) {
-        console.error("❌ Missing required data in localStorage.");
         setError("Missing required data. Please complete all steps.");
+        setIsLoading(false);
         return;
       }
 
-      // ✅ Build FormData
       const formData = new FormData();
       formData.append("title", title);
-      formData.append("tags", JSON.parse(preferences)); // assuming preferences is JSON array
+      const parsedTags: string[] = JSON.parse(preferences);
+      parsedTags.forEach((tag, index) => {
+        formData.append(`tags[${index}]`, tag);
+      });
       formData.append("imageFile", imageFile);
+      formData.append("UserId", user?.UserId ?? "");
+      formData.append("authorName", user?.fullName ?? "");
 
       const pdfFileFromMeta = JSON.parse(pdfMeta);
-      const pdfFileBlob = await fetch(pdfFileFromMeta.url).then(res => res.blob());
-      const pdfFile = new File([pdfFileBlob], pdfFileFromMeta.name, { type: pdfFileFromMeta.type });
+      const pdfFileBlob = await fetch(pdfFileFromMeta.url).then((res) =>
+        res.blob()
+      );
+      const pdfFile = new File([pdfFileBlob], pdfFileFromMeta.name, {
+        type: pdfFileFromMeta.type,
+      });
       formData.append("contentFile", pdfFile);
-
-      console.log("✅ FormData prepared with:");
-      console.log("- title:", title);
-      console.log("- tags:", JSON.parse(preferences));
-      console.log("- imageFile:", imageFile);
-      console.log("- contentFile (from meta):", pdfFile);
 
       await AuthApi.uploadNews(formData);
 
-      console.log("🎉 Upload successful!");
-      onNext();
+      // 🧹 Clear localStorage
+      localStorage.removeItem("step1-preferences");
+      localStorage.removeItem("step2-title");
+      localStorage.removeItem("uploadedImageMeta");
+      localStorage.removeItem("uploadedPdfMeta");
+
+      onNext(); // ➡️ Move to Step 5
     } catch (err) {
-      console.error("❌ Upload failed:", err);
       setError("Upload failed. Please try again.");
+    } finally {
+      setIsLoading(false); // 🔄 Stop loading
     }
   };
 
   return (
     <div className="fixed w-full inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
-      <div className="flex flex-col justify-center items-center relative z-10 w-full max-w-3xl mx-auto p-6 overflow-y-auto max-h-[90vh] bg-linear-65 from-[#f2f2f2] to-[#b2d1e8] shadow-xl rounded-2xl">
+      <div className="flex flex-col justify-center items-center relative z-10 w-full max-w-3xl mx-auto p-6 overflow-y-auto max-h-[90vh] bg-gradient-to-br from-[#f2f2f2] to-[#b2d1e8] shadow-xl rounded-2xl">
         <div className="flex flex-col gap-3 items-center justify-center">
           <div className="flex items-center gap-3">
             <img src="images/image_dark.png" alt="Add Cover" />
@@ -96,9 +104,7 @@ const Step4 = ({ onNext, onBack }: { onNext: () => void; onBack: () => void }) =
 
         <div className="mt-4 w-full">
           {!imageFile ? (
-            <div
-              className="flex flex-col items-center justify-center border-2 border-black bg-linear-65 from-[#f2f2f2] to-[#a9bccb] rounded-lg w-full py-10 text-center cursor-pointer relative"
-            >
+            <div className="flex flex-col items-center justify-center border-2 border-black bg-gradient-to-br from-[#f2f2f2] to-[#a9bccb] rounded-lg w-full py-10 text-center cursor-pointer relative">
               <p>Drag and Drop</p>
               <p>or</p>
               <label htmlFor="image-upload">
@@ -170,6 +176,13 @@ const Step4 = ({ onNext, onBack }: { onNext: () => void; onBack: () => void }) =
           />
         </div>
       </div>
+
+      {/* 🔄 LOADING OVERLAY */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-t-transparent border-white" />
+        </div>
+      )}
     </div>
   );
 };

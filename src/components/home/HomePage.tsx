@@ -1,19 +1,25 @@
-import React from 'react'
-import NavBar from '../NavBar/NavBar'
-import Create from '../../pages/createArticle/Create'
-import { useModalStore } from '../../stores/useModalStore'
-
+import NavBar from "../NavBar/NavBar";
+import Create from "../../pages/createArticle/Create";
+import { useModalStore } from "../../stores/useModalStore";
+import Categories from "../NavBar/Categories";
+import HomeArticle from "../../pages/allArticles/HomeArticle";
+import { useState } from "react";
 
 const HomePage = () => {
-    const {isOpen} = useModalStore()
-    console.log(isOpen);
-    
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const { isOpen } = useModalStore();
+
   return (
     <div>
-        <NavBar />
-        {isOpen && <Create />}
+      <NavBar />
+      {isOpen && <Create />}
+      <Categories
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
+      <HomeArticle selectedCategory={selectedCategory} />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

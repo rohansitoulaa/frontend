@@ -15,7 +15,7 @@ const Step1 = ({ onNext }: Step1Props) => {
 
   const preferenceOptions: string[] = [
     "Technology", "Science", "Travel", "Fitness", "Music",
-    "Movies", "Gaming", "Art", "Photography", "Business",
+    "Movies", "Lifestyle", "Art", "Photography", "Business",
     "Politics", "Fashion", "Food", "Health", "Education",
     "History", "Nature", "Literature", "Finance", "Sports"
   ];

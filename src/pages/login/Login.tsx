@@ -33,17 +33,26 @@ const Login = () => {
       try {
         const response = await AuthApi.login(values);
         console.log("✅ Login successful:", response);
-        handleToken(response.token)
-        navigate("/"); // or wherever you want to redirect
+        handleToken(response.token);
+    
+        // 🚩 Check if user is admin
+        if (
+          values.email === "admin@papertalk.com" &&
+          values.password === "Papertalk@#$1"
+        ) {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+    
       } catch (error) {
         console.log(values);
-        
         console.error("❌ Login failed:", error);
         // Optional: show error to user
       } finally {
         setSubmitting(false);
       }
-    }
+    }    
   });
   const handleLogin = () => {
     formik.handleSubmit(); // Will trigger the onSubmit, which sends data to backend
