@@ -14,9 +14,9 @@ const AuthorBread = ({ crumbsValue = [], currentCrumb = 0 }: CrumbProps) => {
                     <div key={index} className="flex flex-col justify-center items-center">
                         <div className="flex justify-center items-center gap-2 sm:gap-3">
                             <div
-                                className={`flex justify-center items-center w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-sm font-medium rounded-full  transition-all 
+                                className={`flex justify-center items-center w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-sm font-medium border-2 dark:text-[#f2f2f2] rounded-full dark:border-white  transition-all 
                                     ${isActive ? "bg-green-700 text-white border-none cursor-pointer" : ""}
-                                    ${isCompleted ? "bg-black text-white cursor-pointer" : " text-black border-1 border-black cursor-not-allowed"}`}
+                                    ${isCompleted ? "bg-black text-white cursor-pointer dark:bg-white dark:text-black" : " text-black border-1 border-black dark:border-white dark:text-white cursor-not-allowed"}`}
                             >
                                 {index + 1}
                             </div>

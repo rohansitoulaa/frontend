@@ -29,7 +29,7 @@ const Preferences = ({ tags, selected, onChange, maxSelection }: PreferencesProp
           key={index}
           onClick={() => toggleTag(tag)}
           className={`px-4 py-3  rounded-2xl cursor-pointer   ${
-            selected.includes(tag) ? "bg-[linear-gradient(to_right,_#111,_#222,_#111)] text-white" : "bg-linear-65 from-[#f2f2f2] to-[#e5e5e7] text-black"
+            selected.includes(tag) ? "bg-[linear-gradient(to_right,_#111,_#222,_#111)] dark:bg-linear-65 dark:from-[#b0c7e4] dark:to-[#8989d7] dark:text-black text-white" : "bg-linear-65 from-[#93aed0] to-[#9191ce] text-black dark:bg-[linear-gradient(to_right,_#333,_#333,_#333)] dark:text-white"
           }`}
         >
           {tag}

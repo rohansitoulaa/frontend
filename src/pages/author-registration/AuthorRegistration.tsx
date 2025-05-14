@@ -1,10 +1,8 @@
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GOOGLE_CLIENT_ID } from '../../config/config';
-import { useState } from 'react';
-import Step1 from './Step1';
-import Step2 from './Step2';
-import Step3 from './Step3';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import Step1 from "./Step1";
+import Step2 from "./Step2";
+import Step3 from "./Step3";
+import { useNavigate } from "react-router-dom";
 
 const AuthorRegistration = () => {
   const [step, setStep] = useState(1);
@@ -25,17 +23,16 @@ const AuthorRegistration = () => {
   };
 
   const handleFinish = () => {
-    navigate('/'); // ✅ go to home page after step 3 is done
+    navigate("/"); // ✅ go to home page after step 3 is done
   };
 
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <div>
-        {step === 1 && <Step1 onNext={handleNext} />}
-        {step === 2 && <Step2 onNext={handleNext} onBack={handleBack} />}
-        {step === 3 && <Step3 onBack={handleBack} onFinish={handleFinish} />} {/* ✅ added onFinish */}
-      </div>
-    </GoogleOAuthProvider>
+    <div className="dark:bg-[linear-gradient(to_right,_#111,_#222,_#111)] dark:text-white">
+      {step === 1 && <Step1 onNext={handleNext} />}
+      {step === 2 && <Step2 onNext={handleNext} onBack={handleBack} />}
+      {step === 3 && <Step3 onBack={handleBack} onFinish={handleFinish} />}{" "}
+      {/* ✅ added onFinish */}
+    </div>
   );
 };
 

@@ -11,7 +11,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <NavBar />
       {isOpen && <Create />}
       <Categories
         selectedCategory={selectedCategory}

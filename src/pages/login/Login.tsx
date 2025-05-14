@@ -7,18 +7,15 @@ import { loginSchema } from "../../schema/login/loginSchema";
 import { AuthApi } from "../../api/auth";
 import { useAuthStore } from "../../stores/authStore";
 
-
-
-
-const handleToken = async (token:string) => {
+const handleToken = async (token: string) => {
   try {
     localStorage.setItem("auth token", token);
     useAuthStore.getState().setToken(token);
     useAuthStore.getState().fetchUser();
   } catch (error) {
-    console.log("🚀 ~ handleToken ~ error:", error)
+    console.log("🚀 ~ handleToken ~ error:", error);
   }
-}
+};
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,7 +31,7 @@ const Login = () => {
         const response = await AuthApi.login(values);
         console.log("✅ Login successful:", response);
         handleToken(response.token);
-    
+
         // 🚩 Check if user is admin
         if (
           values.email === "admin@papertalk.com" &&
@@ -44,7 +41,6 @@ const Login = () => {
         } else {
           navigate("/");
         }
-    
       } catch (error) {
         console.log(values);
         console.error("❌ Login failed:", error);
@@ -52,14 +48,14 @@ const Login = () => {
       } finally {
         setSubmitting(false);
       }
-    }    
+    },
   });
   const handleLogin = () => {
     formik.handleSubmit(); // Will trigger the onSubmit, which sends data to backend
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen items-center md:items-start">
+    <div className="flex flex-col md:flex-row min-h-screen items-center md:items-start dark:bg-[linear-gradient(to_right,_#111,_#222,_#111)] dark:text-white">
       {/* Login Form Section */}
       <section className="flex w-full md:w-1/2 justify-center items-center p-6 md:p-12 h-screen">
         <div className="flex flex-col gap-6 w-full max-w-md">
@@ -73,9 +69,7 @@ const Login = () => {
           />
 
           {/* Heading */}
-          <h1 className="text-3xl md:text-4xl text-left">
-            Welcome Back
-          </h1>
+          <h1 className="text-3xl md:text-4xl text-left">Welcome Back</h1>
 
           {/* Form */}
           <form
@@ -126,9 +120,8 @@ const Login = () => {
         </div>
       </section>
 
-
       {/* Image Section */}
-      <section className="hidden md:flex w-1/2  bg-white items-center justify-center shadow-2xl h-screen">
+      <section className="hidden md:flex w-1/2  bg-white items-center justify-center shadow-2xl h-screen dark:bg-[linear-gradient(to_right,_#222,_#222,_#111)] dark:shadow-none">
         <div className="flex flex-col items-center gap-4 p-6">
           <img
             className="rounded-2xl shadow-md w-130"
@@ -136,17 +129,17 @@ const Login = () => {
             alt="Reach out"
           />
           {/* New User Prompt */}
-        <div className="text-center mt-6">
-          <p>
-            New user?{" "}
-            <span
-              className="text-blue-600 cursor-pointer underline"
-              onClick={() => navigate("/authorRegistration")}
-            >
-              Sign up
-            </span>
-          </p>
-        </div>
+          <div className="text-center mt-6">
+            <p>
+              New user?{" "}
+              <span
+                className="text-blue-600 cursor-pointer underline"
+                onClick={() => navigate("/authorRegistration")}
+              >
+                Sign up
+              </span>
+            </p>
+          </div>
         </div>
       </section>
     </div>
