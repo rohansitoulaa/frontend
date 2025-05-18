@@ -57,17 +57,17 @@ const Step1 = ({ onNext }: Step1Props) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center ">
       {/* 🔲 Backdrop */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
 
       {/* 🪟 Modal Content */}
-      <div className="relative z-10 w-full max-w-3xl mx-auto p-6 bg-linear-65 from-[#f2f2f2] to-[#b2d1e8] shadow-xl rounded-2xl">
+      <div className="relative z-10 w-full max-w-3xl mx-auto p-6 bg-linear-65 from-[#f2f2f2] to-[#b2d1e8] dark:bg-linear-65 dark:from-[#2d2b2b] dark:to-[#171c20] dark:text-[#f2f2f2] shadow-xl rounded-2xl">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
             Select content type for new article
           </h1>
-          <p className="text-sm text-gray-500">Page 1 of 3</p>
+          <p className="text-sm text-gray-500 dark:text-[#c8c8c8]">Page 1 of 3</p>
         </div>
 
         <Preferences

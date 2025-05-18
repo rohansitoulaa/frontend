@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import Profile from "../../layouts/AuthorProfile/Profile";
 import NoLogin from "../../layouts/AuthorProfile/NoLogin";
 import weatherLocal from "../../browser/weatherLocal";
-
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("auth token");
@@ -21,18 +22,15 @@ const NavBar = () => {
   const currentDate = getCurrentDate();
   const [times, setTimes] = useState<string>("");
   // const [weather, setWeather] = useState<any>();
-  const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
   const [isProfileActive, setIsProfileActive] = useState<boolean>(false);
 
-  const weatherRaw = localStorage.getItem("weather")
+  const weatherRaw = localStorage.getItem("weather");
   const weather = weatherRaw ? JSON.parse(weatherRaw) : null;
 
   const searchRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
 
-  const handleSearchClick = () => {
-    setIsSearchActive(!isSearchActive);
-  };
+ 
 
   const handleProfileClick = () => {
     setIsProfileActive(!isProfileActive);
@@ -48,10 +46,14 @@ const NavBar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setIsSearchActive(false);
-      }
-      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) 
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target as Node)
+      ) {
         setIsProfileActive(false);
       }
     };
@@ -61,7 +63,6 @@ const NavBar = () => {
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center w-full px-4 py-4  gap-4">
-      
       {/* Left Section: Date, Time, Weather */}
       <section className="flex flex-col md:w-1/3 items-start gap-2">
         <div>
@@ -95,34 +96,16 @@ const NavBar = () => {
       {/* Center Section: Logo */}
       <section className="w-full md:w-1/3 flex justify-center">
         <img
-        className="w-50"
-        src="images/logo.png" alt="" />
+          onClick={() => navigate("/")}
+          className="w-50"
+          src="images/logo.png"
+          alt=""
+        />
       </section>
 
       {/* Right Section: Search + Profile */}
       <section className="flex md:w-1/3 justify-end items-center gap-14">
-        {/* Search */}
-        <div
-          ref={searchRef}
-          className={`flex items-center gap-2  ${
-            isSearchActive ? "border-b-2 border-gray-800" : ""
-          }`}
-        >
-          <input
-            placeholder={` ${isSearchActive?"eg: news/ hotnews":""}`}
-            type="text"
-            className={`bg-transparent outline-none transition-all duration-300 text-sm
-              ${isSearchActive ? "w-40 opacity-100" : "w-0 opacity-0"}
-              sm:w-40 sm:opacity-100
-            `}
-          />
-          <img
-            onClick={handleSearchClick}
-            className="w-6 h-6 cursor-pointer"
-            src="/images/search.png"
-            alt="Search Icon"
-          />
-        </div>
+        
 
         {/* Profile */}
         <div ref={profileRef} className="relative">
@@ -133,7 +116,7 @@ const NavBar = () => {
 
           {isProfileActive && (
             <div className="absolute right-0 top-12 z-50">
-              {isAuthenticated?<Profile />:<NoLogin />}
+              {isAuthenticated ? <Profile /> : <NoLogin />}
             </div>
           )}
         </div>

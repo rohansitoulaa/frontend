@@ -2,9 +2,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Play:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 @import "tailwindcss";
+/* src/index.css or src/globals.css */
+/* // #F6EED5
+// #E1EBF5
+// #FAE8E7 */
+body {
+  @apply bg-gradient-to-bl from-[#f1ede3] via-[#d9e3ef] to-[#f8eae8] bg-no-repeat bg-fixed font-[Play] tracking-widest;
+}
 
 body {
-  background: linear-gradient(to bottom, #f2f2f2, #dad6ef, #d6d0f9);
+  /* background: linear-gradient(135deg, #f0f2f5 0%, #d9e2ec 50%, #f7f9fc 100%); */
+
   background-repeat: no-repeat;
   font-family: "Play", serif;
   background-attachment: fixed;
@@ -25,4 +33,27 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.animate-fade-in-out {
+  animation: fade-in-out 4s ease-in-out forwards;
 }

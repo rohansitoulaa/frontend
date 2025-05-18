@@ -1,28 +1,31 @@
-import PendingAuthors from "./dashboard/authorRequest/PendingAuthors";
-import PendingArticles from "./dashboard/pendingArticles/PendingArticles";
-import TopAuthors from "./dashboard/topAuthors/TopAuthors";
-import TopCategories from "./dashboard/topCategories/TopCategories";
-import Total from "./dashboard/total/Total";
+import { useLocation } from "react-router-dom";
+import Dashboard from "./dashboard/Dashboard";
 import Navbar from "./navbar/Navbar";
+import Categories from "./categories/Categories"; // Uncomment when implemented
+import News from "./authors/News";
+import Stats from "./stats/Stats"; // Uncomment when implemented
+import Authors from "./users/Authors";
 
 const AdminPanel = () => {
+  const location = useLocation();
+  const section = location.pathname.split("/")[2]?.toLowerCase() || "dashboard";
+
   return (
-    <>
-      <div className="w-full flex justify-center max-h-screen py-3  gap-3">
+    <div className="w-full h-screen flex bg-white">
+      {/* Sidebar Navbar */}
+      <div className="w-[220px] h-full shadow-md ">
         <Navbar />
-        <div className="flex flex-col gap-3 max-h-screen ">
-          <div className="flex gap-3 max-h-screen ">
-            <Total />
-            <TopAuthors />
-            <TopCategories />
-          </div>
-          <div className="flex gap-3 max-h-screen">
-            <PendingArticles />
-            <PendingAuthors />
-          </div>
-        </div>
       </div>
-    </>
+
+      {/* Dynamic Main Panel */}
+      <div className="flex-1 ">
+        {section === "dashboard" && <Dashboard />}
+        {section === "authors" && <Authors />}
+        {section === "categories" && <Categories />}
+        {section === "news" && <News />}
+        {section === "stats" && <Stats />}
+      </div>
+    </div>
   );
 };
 

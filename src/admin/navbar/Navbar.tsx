@@ -25,27 +25,30 @@ const Navbar = () => {
     "": "Dashboard",
     dashboard: "Dashboard",
     categories: "Categories",
-    users: "Users",
     authors: "Authors",
+    news: "News",
     stats: "Stats",
     logout: "Logout",
   };
 
-  const currentSection = sectionMap[normalizedSection] || "";
+  const currentSection = (sectionMap[normalizedSection] || "").toLowerCase();
 
   const handleClick = (section: string) => {
     if (section === "Logout") {
       setShowLogout(true);
+    } else {
+      navigate(`/admin/${section.toLowerCase()}`);
     }
   };
 
   return (
-    <div className="flex flex-col justify-evenly gap-5 p-5 shadow-xl rounded-4xl w-1/3 bg-linear-90 from-[#FFF4EC] to-[#ebe5e1]">
+    <div className="flex flex-col justify-evenly gap-5 p-5  rounded-r-2xl min-h-[100vh] bg-gradient-to-t from-[#f2eee2] via-[#E1EBF5] to-[#FAE8E7]">
       <div>
-        <img className="w-40" src="images/logo.png" alt="Logo" />
+        <img className="w-40" src="/images/logo.png" alt="Logo" />
       </div>
       {navItems.map((item, index) => {
-        const isActive = item.value === currentSection;
+        const isActive = item.value.toLowerCase() === currentSection;
+
         return (
           <NavComp
             key={index}

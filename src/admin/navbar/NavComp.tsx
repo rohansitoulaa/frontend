@@ -17,7 +17,7 @@ const NavComp = ({
     <div
       className={`flex gap-3 
         ${isActive ? "bg-[#b0b6bb] text-[#0e0303] p-2 rounded-xl" : "hover:bg-gray-200"} 
-        ${className} `}
+        ${className} cursor-pointer items-center justify-start`}
       onClick={onClick}
     >
       <img src={imgSrc} alt="adminImg" />

@@ -98,6 +98,7 @@ export const AuthApi = {
       const response = await apiClient.post("/auth/login", data, {
         withCredentials: true,
       });
+      // console.log(response.data); gives login scuessfull and token
       return response.data;
     } catch (error) {
       console.error("❌ ~ login ~ error:", error);
@@ -117,6 +118,24 @@ export const AuthApi = {
       return response.data;
     } catch (error) {
       console.error("🚀 ~ uploadNews ~ error:", error);
+      throw error;
+    }
+  },
+  async updateAuthor(updatedData: {
+    fullName: string;
+    bio: string;
+    preferences: string[];
+  }) {
+    try {
+      const response = await apiClient.put("/auth/profile", updatedData, {
+        headers: {
+          Authorization: `Bearer ${auth_token}`,
+        },
+        withCredentials: true,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("🚀 ~ updateAuthor ~ error:", error);
       throw error;
     }
   },

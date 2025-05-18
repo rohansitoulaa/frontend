@@ -6,18 +6,21 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import { loginSchema } from "../../schema/login/loginSchema";
 import { AuthApi } from "../../api/auth";
 import { useAuthStore } from "../../stores/authStore";
+import { useState } from "react";
 
 const handleToken = async (token: string) => {
   try {
-    localStorage.setItem("auth token", token);
+    // console.log("🟡 handleToken() called with token:", token);
+
     useAuthStore.getState().setToken(token);
-    useAuthStore.getState().fetchUser();
+    await useAuthStore.getState().fetchUser();
   } catch (error) {
     console.log("🚀 ~ handleToken ~ error:", error);
   }
 };
 
 const Login = () => {
+  const [serverError, setServerError] = useState(""); // Add this
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -28,23 +31,28 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
+        setServerError(""); // clear any previous error
+
         const response = await AuthApi.login(values);
         console.log("✅ Login successful:", response);
-        handleToken(response.token);
 
-        // 🚩 Check if user is admin
-        if (
-          values.email === "admin@papertalk.com" &&
-          values.password === "Papertalk@#$1"
-        ) {
+        await handleToken(response.token);
+        const user = useAuthStore.getState().user;
+
+        if (user?.UserId === "dyUWvAgD") {
           navigate("/admin");
         } else {
           navigate("/");
         }
-      } catch (error) {
+      } catch (error: any) {
         console.log(values);
         console.error("❌ Login failed:", error);
-        // Optional: show error to user
+
+        if (error?.response?.data?.message) {
+          setServerError(error.response.data.message);
+        } else {
+          setServerError("Something went wrong. Please try again.");
+        }
       } finally {
         setSubmitting(false);
       }
@@ -70,6 +78,11 @@ const Login = () => {
 
           {/* Heading */}
           <h1 className="text-3xl md:text-4xl text-left">Welcome Back</h1>
+          {serverError && (
+            <div className="text-red-600 text-sm text-center">
+              {serverError}
+            </div>
+          )}
 
           {/* Form */}
           <form

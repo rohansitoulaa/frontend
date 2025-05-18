@@ -6,8 +6,10 @@ import { persist } from "zustand/middleware";
 interface User {
   email: string;
   fullName: string;
-  preferences:string[];
+  preferences: string[];
   UserId: string;
+  bio?: string;
+  experienceLevel?: string;
 }
 
 interface AuthStore {
@@ -25,13 +27,14 @@ export const useAuthStore = create<AuthStore>()(
       token: null,
 
       setToken: (token: string) => {
+        localStorage.setItem("auth token", token);
         set({ token });
       },
 
       fetchUser: async () => {
         const token = get().token;
         if (!token) return;
-      
+
         try {
           const { profile } = await getProfile();
           const response = await getProfile();
@@ -43,6 +46,8 @@ export const useAuthStore = create<AuthStore>()(
               fullName: profile.fullName,
               preferences: profile.preferences,
               UserId: profile.UserId, // 🟢 map UserId → authorId
+              bio: profile.bio,
+              experienceLevel: profile.experienceLevel,
             },
           });
           console.log(profile.UserId);
@@ -53,7 +58,7 @@ export const useAuthStore = create<AuthStore>()(
       },
 
       logout: () => {
-        localStorage.removeItem("authToken");
+        localStorage.removeItem("auth token");
         set({ user: null, token: null });
       },
     }),

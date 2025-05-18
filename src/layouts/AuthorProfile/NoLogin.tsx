@@ -42,7 +42,9 @@ const NoLogin = () => {
       </div>
 
       <div className="flex justify-between">
-        <div className="rounded-[2px] cursor-pointer">Help</div>
+        <div 
+        onClick={() => navigate("chat")}
+        className="rounded-[2px] cursor-pointer">Help</div>
         <div
           onClick={() => navigate("privacy")}
           className="rounded-[2px] cursor-pointer"

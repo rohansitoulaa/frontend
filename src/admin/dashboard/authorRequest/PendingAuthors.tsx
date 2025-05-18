@@ -44,7 +44,7 @@ const PendingAuthors = () => {
   }, []);
 
   return (
-    <div className=" rounded-4xl shadow-xl w-1/2 relative bg-[#FEF4EC]">
+    <div className=" rounded-2xl   relative bg-gradient-to-tr from-[#f2eee2] via-[#E1EBF5] to-[#FAE8E7]">
       <p className="text-2xl p-5">Pending Authors</p>
 
       {loading && <p className="p-5">Loading...</p>}
@@ -52,8 +52,9 @@ const PendingAuthors = () => {
       <div className="p-5 space-y-4 max-h-[500px] overflow-y-auto">
         {!loading && authors.length === 0 && (
           <img
-            src="images/noPendinAuthors.png"
+            src="/images/noPendinAuthors.png"
             className="w-85 mx-auto rounded-4xl"
+            alt="No pending authors"
           />
         )}
 

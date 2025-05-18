@@ -93,7 +93,7 @@ const Step4 = ({
   return (
     <div className="fixed w-full inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
-      <div className="flex flex-col justify-center items-center relative z-10 w-full max-w-3xl mx-auto p-6 overflow-y-auto max-h-[90vh] bg-gradient-to-br from-[#f2f2f2] to-[#b2d1e8] shadow-xl rounded-2xl">
+      <div className="flex flex-col justify-center items-center relative z-10 w-full max-w-3xl mx-auto p-6 overflow-y-auto max-h-[90vh] bg-gradient-to-br from-[#f2f2f2] to-[#b2d1e8] dark:bg-linear-65 dark:from-[#2d2b2b] dark:to-[#171c20] dark:text-[#f2f2f2] shadow-xl rounded-2xl">
         <div className="flex flex-col gap-3 items-center justify-center">
           <div className="flex items-center gap-3">
             <img src="images/image_dark.png" alt="Add Cover" />
@@ -104,7 +104,7 @@ const Step4 = ({
 
         <div className="mt-4 w-full">
           {!imageFile ? (
-            <div className="flex flex-col items-center justify-center border-2 border-black bg-gradient-to-br from-[#f2f2f2] to-[#a9bccb] rounded-lg w-full py-10 text-center cursor-pointer relative">
+            <div className="flex flex-col items-center justify-center border-2 border-black bg-gradient-to-br from-[#f2f2f2] to-[#a9bccb] dark:bg-linear-65 dark:from-[#433c3c] dark:to-[#171c20] dark:text-[#f2f2f2] rounded-lg w-full py-10 text-center cursor-pointer relative">
               <p>Drag and Drop</p>
               <p>or</p>
               <label htmlFor="image-upload">

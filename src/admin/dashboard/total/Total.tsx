@@ -23,7 +23,7 @@ const Total = () => {
   }, []);
 
   return (
-    <div className="min-w-70  px-5 py-4 bg-linear-90 from-[#ebe5e1] to-[#FFF4EC] rounded-4xl shadow-md">
+    <div className="min-w-70  px-5 py-4 bg-gradient-to-tr from-[#f2eee2] via-[#E1EBF5] to-[#FAE8E7] rounded-2xl">
       <h2 className="text-xl font-bold mb-6 text-gray-800">Dashboard Totals</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div className="  flex items-center justify-between">

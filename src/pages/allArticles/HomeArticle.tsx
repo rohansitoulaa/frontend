@@ -30,7 +30,7 @@ const HomeArticle: React.FC<HomeArticleProps> = ({ selectedCategory }) => {
   const fetchArticles = async () => {
     setLoading(true);
     setError(null);
-    setArticles([]); // Clear previous content early
+    setArticles([]);
     setSnippets([]);
 
     try {
@@ -87,6 +87,14 @@ const HomeArticle: React.FC<HomeArticleProps> = ({ selectedCategory }) => {
     setSelectedArticle(null);
   };
 
+  // Gradient direction cycle
+  const gradientDirections = [
+    "bg-gradient-to-br",
+    "bg-gradient-to-bl",
+    "bg-gradient-to-r",
+    "bg-gradient-to-l",
+  ];
+
   return (
     <>
       <div className="p-4">
@@ -94,9 +102,11 @@ const HomeArticle: React.FC<HomeArticleProps> = ({ selectedCategory }) => {
 
         {!loading && error && (
           <div className="flex flex-col items-center text-center text-red-600 mt-10">
-            <img 
-            className="w-100 shadow-2xl rounded-4xl"
-            src="images/oops.png" alt="" />
+            <img
+              className="w-100 rounded-4xl"
+              src="images/oops.png"
+              alt="Error loading"
+            />
           </div>
         )}
 
@@ -107,6 +117,9 @@ const HomeArticle: React.FC<HomeArticleProps> = ({ selectedCategory }) => {
         {!loading && !error && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {articles.map((article, index) => {
+              const gradientDirection =
+                gradientDirections[index % gradientDirections.length];
+
               const date = new Date(article.createdAt);
               const readable = date.toLocaleString("en-US", {
                 year: "numeric",
@@ -120,7 +133,7 @@ const HomeArticle: React.FC<HomeArticleProps> = ({ selectedCategory }) => {
               return (
                 <motion.div
                   key={article.id}
-                  className="bg-white dark:bg-black p-4 rounded-xl shadow hover:shadow-lg transition"
+                  className={`${gradientDirection}  from-[#d4f1e3] via-[#e2f0fb] to-[#fbe7e6] dark:from-[#31273a] dark:via-[#0d1d29] dark:to-[#162835] p-4 rounded-xl shadow hover:shadow-lg transition`}
                 >
                   <h3 className="font-semibold text-lg">{article.title}</h3>
                   <p>by {article.authorName}</p>
@@ -153,4 +166,5 @@ const HomeArticle: React.FC<HomeArticleProps> = ({ selectedCategory }) => {
     </>
   );
 };
+
 export default HomeArticle;

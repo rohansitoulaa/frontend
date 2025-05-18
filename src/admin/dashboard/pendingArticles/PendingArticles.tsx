@@ -41,7 +41,7 @@ const PendingArticles = () => {
   }, []);
 
   return (
-    <div className=" rounded-4xl shadow-xl w-1/2  relative bg-[#FEF4EC]">
+    <div className=" rounded-2xl    relative bg-gradient-to-bl from-[#f2eee2] via-[#E1EBF5] to-[#FAE8E7]">
       <p className="text-2xl p-5">Pending Articles</p>
 
       {loading && <p className="p-5">Loading...</p>}
@@ -50,7 +50,7 @@ const PendingArticles = () => {
         {articles.length === 0 && !loading && (
           <img
             className="w-85 mx-auto rounded-4xl"
-            src="images/noPendingArticles.png"
+            src="/images/noPendingArticles.png"
             alt="No Data"
           />
         )}

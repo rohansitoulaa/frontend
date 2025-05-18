@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import Button from '../../components/common/Button/Button';
+import { useEffect, useState } from "react";
+import Button from "../../components/common/Button/Button";
 
 interface Step2Props {
   onNext: () => void;
@@ -7,11 +7,11 @@ interface Step2Props {
 }
 
 const Step2 = ({ onNext, onBack }: Step2Props) => {
-  const [title, setTitle] = useState('');
-  const [error, setError] = useState('');
+  const [title, setTitle] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const storedTitle = localStorage.getItem('step2-title');
+    const storedTitle = localStorage.getItem("step2-title");
     if (storedTitle) {
       setTitle(storedTitle);
     }
@@ -19,14 +19,14 @@ const Step2 = ({ onNext, onBack }: Step2Props) => {
 
   const handleNextClicked = () => {
     if (title.trim().length < 3) {
-      setError('Title must be at least 3 characters.');
+      setError("Title must be at least 3 characters.");
       return;
     }
 
     // 💾 Save title to localStorage
-    localStorage.setItem('step2-title', title.trim());
+    localStorage.setItem("step2-title", title.trim());
 
-    setError('');
+    setError("");
     onNext();
   };
 
@@ -36,9 +36,9 @@ const Step2 = ({ onNext, onBack }: Step2Props) => {
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
 
       {/* 🪟 Modal Content */}
-      <div className="relative z-10 w-full max-w-3xl mx-auto p-6 bg-linear-65 from-[#f2f2f2] to-[#b2d1e8] shadow-xl rounded-2xl">
+      <div className="relative z-10 w-full max-w-3xl mx-auto p-6 bg-linear-65 from-[#f2f2f2] to-[#b2d1e8] dark:bg-linear-65 dark:from-[#2d2b2b] dark:to-[#171c20] dark:text-[#f2f2f2] shadow-xl rounded-2xl">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
             What is the title of your article?
           </h1>
           <p className="text-sm text-gray-500">Page 2 of 3</p>
