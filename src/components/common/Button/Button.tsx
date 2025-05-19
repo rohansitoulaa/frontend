@@ -32,9 +32,10 @@ const Button = ({
   };
 
   const isNoBg = btnTheme === "noBg";
+  const isBorderBlack = btnTheme === "borderBlack";
 
   const chevronClasses = `w-5 h-5 ${
-    isNoBg ? "text-black dark:text-white" : "text-white"
+    isNoBg || isBorderBlack ? "text-black dark:text-white" : "text-white"
   }`;
 
   return (

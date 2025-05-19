@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 const Unauthorized: React.FC = () => {
   const navigate = useNavigate();
 
+  const handleNavigate = (path: string) => {
+    localStorage.clear(); // Remove all data
+    navigate(path);
+  };
+
   return (
     <div className="h-screen bg-gradient-to-br from-[#d4f1e3] via-[#e2f0fb] to-[#fbe7e6] flex items-center justify-center relative px-4">
       <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl max-w-2xl w-full p-10 flex flex-col items-center text-center animate-fade-in">
@@ -30,13 +35,13 @@ const Unauthorized: React.FC = () => {
             value="Login"
             btnTheme="blackBtn"
             className="w-1/2 py-3 text-lg rounded-xl shadow-md"
-            onClick={() => navigate("/login")}
+            onClick={() => handleNavigate("/login")}
           />
           <Button
             value="Explore as User"
             btnTheme="borderBlack"
             className="w-1/2 py-3 text-lg rounded-xl shadow-md"
-            onClick={() => navigate("/")}
+            onClick={() => handleNavigate("/")}
           />
         </div>
       </div>

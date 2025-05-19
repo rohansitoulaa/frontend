@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import Preferences from '../../components/features/authorPreferences/Preferences';
-import Button from '../../components/common/Button/Button';
-import { useModalStore } from '../../stores/useModalStore';
+import { useEffect, useState } from "react";
+import Preferences from "../../components/features/authorPreferences/Preferences";
+import Button from "../../components/common/Button/Button";
+import { useModalStore } from "../../stores/useModalStore";
 
 interface Step1Props {
   onNext: () => void;
@@ -14,10 +14,26 @@ const Step1 = ({ onNext }: Step1Props) => {
   const [error, setError] = useState<string | null>(null);
 
   const preferenceOptions: string[] = [
-    "Technology", "Science", "Travel", "Fitness", "Music",
-    "Movies", "Lifestyle", "Art", "Photography", "Business",
-    "Politics", "Fashion", "Food", "Health", "Education",
-    "History", "Nature", "Literature", "Finance", "Sports"
+    "Technology",
+    "Science",
+    "Travel",
+    "Fitness",
+    "Music",
+    "Movies",
+    "Lifestyle",
+    "Art",
+    "Photography",
+    "Business",
+    "Politics",
+    "Fashion",
+    "Food",
+    "Health",
+    "Education",
+    "History",
+    "Nature",
+    "Literature",
+    "Finance",
+    "Sports",
   ];
 
   useEffect(() => {
@@ -28,15 +44,15 @@ const Step1 = ({ onNext }: Step1Props) => {
     }
 
     // 🔐 Lock scroll on open
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, []);
 
   const handlePreferenceChange = (updatedPreferences: string[]) => {
     if (updatedPreferences.length > 5) {
-      setError('You can only select up to 5 preferences.');
+      setError("You can only select up to 5 preferences.");
     } else {
       setPreferences(updatedPreferences);
       setError(null);
@@ -45,7 +61,7 @@ const Step1 = ({ onNext }: Step1Props) => {
 
   const handleNextClick = () => {
     if (preferences.length === 0) {
-      setError('Please select at least one preference.');
+      setError("Please select at least one preference.");
       return;
     }
 
@@ -67,7 +83,9 @@ const Step1 = ({ onNext }: Step1Props) => {
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
             Select content type for new article
           </h1>
-          <p className="text-sm text-gray-500 dark:text-[#c8c8c8]">Page 1 of 3</p>
+          <p className="text-sm text-gray-500 dark:text-[#c8c8c8]">
+            Page 1 of 4
+          </p>
         </div>
 
         <Preferences
@@ -77,16 +95,10 @@ const Step1 = ({ onNext }: Step1Props) => {
           onChange={handlePreferenceChange}
         />
 
-        {error && (
-          <p className="text-red-600 text-sm mt-2">{error}</p>
-        )}
+        {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
 
         <div className="flex justify-end items-center gap-4 mt-6">
-          <Button
-            onClick={close}
-            btnTheme="borderBlack"
-            value="Cancel"
-          />
+          <Button onClick={close} btnTheme="borderBlack" value="Cancel" />
           <Button
             btnTheme="blackBtn"
             value="Next"

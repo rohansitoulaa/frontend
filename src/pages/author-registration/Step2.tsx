@@ -131,10 +131,10 @@ const Step2 = ({ onNext, onBack }: Step2Props) => {
               <div>
                 By signing up, you agree to our
                 <span 
-                onClick={() => navigate("terms")}
+                onClick={() => navigate("/terms")}
                 className="text-blue-600"> Terms and Conditions </span>
                 and <span 
-                onClick= {() => navigate("privacy")}
+                onClick= {() => navigate("/privacy")}
                 className="text-blue-600">Privacy Policy</span>
               </div>
             </div>

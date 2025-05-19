@@ -100,6 +100,7 @@ const Step4 = ({
             <p>Add Cover</p>
           </div>
           <h1>Upload a cover image for your article</h1>
+          <p className="text-sm text-gray-500">Page 4 of 4</p>
         </div>
 
         <div className="mt-4 w-full">

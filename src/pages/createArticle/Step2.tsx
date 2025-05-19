@@ -41,7 +41,7 @@ const Step2 = ({ onNext, onBack }: Step2Props) => {
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
             What is the title of your article?
           </h1>
-          <p className="text-sm text-gray-500">Page 2 of 3</p>
+          <p className="text-sm text-gray-500">Page 2 of 4</p>
         </div>
 
         <input

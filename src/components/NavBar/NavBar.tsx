@@ -5,11 +5,12 @@ import { motion } from "framer-motion";
 import Profile from "../../layouts/AuthorProfile/Profile";
 import NoLogin from "../../layouts/AuthorProfile/NoLogin";
 import weatherLocal from "../../browser/weatherLocal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("auth token");
@@ -18,6 +19,9 @@ const NavBar = () => {
       setIsAuthenticated(true);
     }
   }, []);
+  useEffect(() => {
+    setIsProfileActive(false); // Close dropdown on route change
+  }, [location.pathname]);
 
   const currentDate = getCurrentDate();
   const [times, setTimes] = useState<string>("");
@@ -29,8 +33,6 @@ const NavBar = () => {
 
   const searchRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
-
- 
 
   const handleProfileClick = () => {
     setIsProfileActive(!isProfileActive);
@@ -46,19 +48,19 @@ const NavBar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        searchRef.current &&
-        !searchRef.current.contains(event.target as Node)
-      ) 
-      if (
+      const clickedOutsideProfile =
         profileRef.current &&
-        !profileRef.current.contains(event.target as Node)
-      ) {
+        !profileRef.current.contains(event.target as Node);
+
+      if (clickedOutsideProfile) {
         setIsProfileActive(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   return (
@@ -105,8 +107,6 @@ const NavBar = () => {
 
       {/* Right Section: Search + Profile */}
       <section className="flex md:w-1/3 justify-end items-center gap-14">
-        
-
         {/* Profile */}
         <div ref={profileRef} className="relative">
           <div

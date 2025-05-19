@@ -84,6 +84,7 @@ const Step3 = ({ onNext, onBack }: StepProps) => {
         <div className="flex flex-col gap-3 items-center justify-center">
           <img src="images/addFile.png" alt="Add File" />
           <h1>Upload your PDF file</h1>
+          <p className="text-sm text-gray-500">Page 3 of 4</p>
         </div>
 
         <div className="mt-4 w-full">

@@ -21,12 +21,12 @@ createRoot(document.getElementById("root")!).render(
       <Route path="/" element={<App />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/faqs" element={<FAQs />} />
-        <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/chat" element={<ChatBot />} />
         <Route path="/profile" element={<AuthorProfile />} />
       </Route>
       <Route path="/authorRegistration" element={<AuthorRegistration />} />
+      <Route path="terms" element={<Terms />} />
       <Route
         path="/admin/*"
         element={
