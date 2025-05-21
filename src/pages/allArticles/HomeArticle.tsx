@@ -11,7 +11,7 @@ interface Article {
   createdAt: string;
   content: any;
   image: string;
-  tags?: string;
+  tags?: string[];
 }
 
 interface HomeArticleProps {
@@ -135,10 +135,22 @@ const HomeArticle: React.FC<HomeArticleProps> = ({ selectedCategory }) => {
                   key={article.id}
                   className={`${gradientDirection}  from-[#d4f1e3] via-[#e2f0fb] to-[#fbe7e6] dark:from-[#31273a] dark:via-[#0d1d29] dark:to-[#162835] p-4 rounded-xl shadow hover:shadow-lg transition`}
                 >
-                  <h3 className="font-semibold text-lg">{article.title}</h3>
+                  <h1 className="font-semibold text-lg">{article.title}</h1>
                   <p>by {article.authorName}</p>
                   <p className="text-[12px]">{readable}</p>
-                  <p>{article.tags}</p>
+                  {Array.isArray(article.tags) && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {article.tags.map((tag, i) => (
+                        <span
+                          key={i}
+                          className="px-2 py-1 bg-white/40 dark:bg-white/10 text-xs text-gray-700 dark:text-gray-200 rounded-full"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
                   <img
                     src={article.image}
                     alt={article.title}

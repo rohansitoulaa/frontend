@@ -65,8 +65,8 @@ export default function ChatBot() {
   }, [messages, isTyping]);
 
   return (
-    <div className="h-screen w-screen dark:bg-[#1e1e1e] flex items-center justify-center">
-      <div className="w-full max-w-4xl h-full flex flex-col dark:bg-[#2b2b2b] sm:rounded-xl ">
+    <div className="  overflow-x-hidden w-screen dark:bg-[linear-gradient(to_right,_#111,_#222,_#111)] flex items-center justify-center">
+      <div className="w-full max-w-4xl h-full flex flex-col  sm:rounded-xl ">
         {/* Chat Area */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <div
@@ -160,11 +160,11 @@ export default function ChatBot() {
 
           {/* Footer */}
           <div
-            className={`p-4 border-t border-gray-300 dark:border-gray-700 dark:bg-[#2b2b2b] ${
+            className={`p-4   ${
               isTyping ? "pointer-events-none opacity-50" : ""
             }`}
           >
-            <div className="flex flex-col gap-4 border-t-2 pt-5 border-[#826f6f]">
+            <div className="flex flex-col gap-4  pt-5 border-[#826f6f]">
               <button
                 onClick={handleRestart}
                 className="px-4 py-2 text-start rounded  "
@@ -178,7 +178,7 @@ export default function ChatBot() {
                     {availableQuestions.map((q) => (
                       <button
                         key={q.id}
-                        className="bg-white dark:bg-gray-800 dark:hover:bg-gray-700 text-left p-3 rounded-4xl text-sm transition disabled:opacity-60"
+                        className="bg-[#d5ecd5] shadow-sm dark:bg-gray-800 dark:hover:bg-gray-700 text-left p-3 rounded-md text-sm transition disabled:opacity-60"
                         onClick={() => handleQuestionClick(q)}
                         disabled={isTyping}
                       >

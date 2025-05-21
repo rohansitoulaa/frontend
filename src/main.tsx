@@ -14,6 +14,7 @@ import AuthorProfile from "./pages/authorprofile/AuthorProfile.tsx";
 import ProtectedRoute from "./routes/ProtectedRoute.tsx";
 import { Navigate } from "react-router-dom";
 import Unauthorized from "./pages/unauthorized/Unauthorized.tsx";
+import Aboutus from "./pages/aboutus/Aboutus.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/chat" element={<ChatBot />} />
         <Route path="/profile" element={<AuthorProfile />} />
+        <Route path="/aboutus" element={<Aboutus />} />
       </Route>
       <Route path="/authorRegistration" element={<AuthorRegistration />} />
       <Route path="terms" element={<Terms />} />

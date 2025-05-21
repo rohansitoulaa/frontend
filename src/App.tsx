@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useAuthStore } from "./stores/authStore";
 import NavBar from "./components/NavBar/NavBar";
 import { Outlet } from "react-router-dom";
-
+import { ParallaxProvider } from "react-scroll-parallax";
 weatherData();
 
 const App = () => {
@@ -27,12 +27,14 @@ const App = () => {
   }, [theme]);
 
   return (
-    <div
-      className={` h-[100vh]  dark:bg-[linear-gradient(to_right,_#111,_#222,_#111)] dark:!bg-black dark:!text-white `}
-    >
-      <NavBar />
-      <Outlet />
-    </div>
+    <ParallaxProvider>
+      <div
+        className={` h-[100vh]  dark:bg-[linear-gradient(to_right,_#111,_#222,_#111)] dark:!bg-black dark:!text-white `}
+      >
+        <NavBar />
+        <Outlet />
+      </div>
+    </ParallaxProvider>
   );
 };
 

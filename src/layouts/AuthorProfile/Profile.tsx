@@ -124,12 +124,23 @@ const Profile = () => {
             </div>
 
             <div className="flex justify-between px-5">
-              <div className="  cursor-pointer">Help</div>
+              <div
+                onClick={() => navigate("/chat")}
+                className="  cursor-pointer"
+              >
+                Help
+              </div>
+              <div
+                onClick={() => navigate("/aboutus")}
+                className="  cursor-pointer"
+              >
+                About
+              </div>
               <div
                 onClick={() => navigate("privacy")}
                 className=" cursor-pointer"
               >
-                Privacy Policy
+                Privacy
               </div>
               <div onClick={() => navigate("/faqs")} className="cursor-pointer">
                 Faqs

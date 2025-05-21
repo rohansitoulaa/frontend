@@ -64,7 +64,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center w-full px-4 py-4  gap-4">
+    <div className="flex flex-col  md:flex-row justify-between items-center w-full px-4 py-4  gap-4">
       {/* Left Section: Date, Time, Weather */}
       <section className="flex flex-col md:w-1/3 items-start gap-2">
         <div>
@@ -96,13 +96,13 @@ const NavBar = () => {
       </section>
 
       {/* Center Section: Logo */}
-      <section className="w-full md:w-1/3 flex justify-center">
-        <img
+      <section className="flex justify-center cursor-pointer">
+        <div
           onClick={() => navigate("/")}
-          className="w-50"
-          src="images/logo.png"
-          alt=""
-        />
+          className="font-gothic text-[50px] cursoe-pointer "
+        >
+          Paper Talk
+        </div>
       </section>
 
       {/* Right Section: Search + Profile */}

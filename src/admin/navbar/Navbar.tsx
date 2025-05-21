@@ -43,9 +43,7 @@ const Navbar = () => {
 
   return (
     <div className="flex flex-col justify-evenly gap-5 p-5  rounded-r-2xl min-h-[100vh] bg-gradient-to-t from-[#f2eee2] via-[#E1EBF5] to-[#FAE8E7]">
-      <div>
-        <img className="w-40" src="/images/logo.png" alt="Logo" />
-      </div>
+      <div className="font-gothic text-[34px]">Paper Talk</div>
       {navItems.map((item, index) => {
         const isActive = item.value.toLowerCase() === currentSection;
 

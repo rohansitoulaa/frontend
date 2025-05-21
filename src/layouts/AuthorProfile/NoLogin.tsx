@@ -42,18 +42,28 @@ const NoLogin = () => {
       </div>
 
       <div className="flex justify-between">
-        <div 
-        onClick={() => navigate("chat")}
-        className="rounded-[2px] cursor-pointer">Help</div>
+       
+        <div
+          onClick={() => navigate("chat")}
+          className="rounded-[2px] cursor-pointer"
+        >
+          Help
+        </div>
+         <div
+          onClick={() => navigate("aboutus")}
+          className="rounded-[2px] cursor-pointer"
+        >
+          About us
+        </div>
         <div
           onClick={() => navigate("privacy")}
           className="rounded-[2px] cursor-pointer"
         >
-          Privacy Policy
+          Privacy 
         </div>
         <div
           onClick={() => navigate("/faqs")}
-          className="rounded-[2px] cursoe-pointer"
+          className="rounded-[2px] cursor-pointer"
         >
           FAQs
         </div>

@@ -12,14 +12,14 @@ const Categories: React.FC<CategoriesProps> = ({
   const categories: string[] = [
     "All",
     "Technology",
-    "Health",
     "Science",
-    "Sports",
-    "Entertainment",
-    "Business",
-    "Lifestyle",
     "Travel",
-    "Education",
+    "Fitness",
+    "Movies",
+    "Health",
+    "Sports",
+    "Business",
+    "Literature",
     "Food",
   ];
 

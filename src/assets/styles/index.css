@@ -1,22 +1,32 @@
-@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Play:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap");
 
 @import "tailwindcss";
 /* src/index.css or src/globals.css */
 /* // #F6EED5
 // #E1EBF5
 // #FAE8E7 */
-body {
+/* body {
   @apply bg-gradient-to-bl from-[#f1ede3] via-[#d9e3ef] to-[#f8eae8] bg-no-repeat bg-fixed font-[Play] tracking-widest;
+} */
+@font-face {
+  font-family: "Runtime";
+  src: url("/fonts/Runtime-Regular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
-  /* background: linear-gradient(135deg, #f0f2f5 0%, #d9e2ec 50%, #f7f9fc 100%); */
+  background: linear-gradient(135deg, #ffff 0%, #f2f2f2 50%, #f3f3f3 100%);
 
   background-repeat: no-repeat;
-  font-family: "Play", serif;
+
   background-attachment: fixed;
   letter-spacing: 2px;
+}
+
+h1 {
+  font-family: "Newsreader", serif;
 }
 
 @config "../../../tailwind.config.ts";
